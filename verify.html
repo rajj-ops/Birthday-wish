@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Security Verification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: #060103;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ========================================================
+       COMPACT & CLEAN WATER RIPPLE EFFECT (50px Sharp Wave)
+       ======================================================== */
+    .water-ripple {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      z-index: 99999;
+      border: 2px solid rgba(255, 30, 86, 0.95);
+      box-shadow: 0 0 10px rgba(255, 30, 86, 0.8), inset 0 0 6px rgba(255, 30, 86, 0.5);
+      animation: waterWave 0.55s cubic-bezier(0.1, 0.5, 0.2, 1) forwards;
+    }
+
+    .water-ripple-secondary {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      z-index: 99998;
+      border: 1.5px solid rgba(96, 165, 250, 0.8);
+      box-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+      animation: waterWave 0.7s cubic-bezier(0.1, 0.5, 0.3, 1) 0.08s forwards;
+    }
+
+    @keyframes waterWave {
+      0% {
+        width: 6px;
+        height: 6px;
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+      }
+      60% {
+        opacity: 0.8;
+      }
+      100% {
+        width: 50px;
+        height: 50px;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    /* Laser Background Lines */
+    .laser-line-h {
+      position: absolute;
+      width: 100vw;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, #ff0040 25%, #ff3b6d 50%, #ff0040 75%, transparent 100%);
+      box-shadow: 0 0 20px #ff0040, 0 0 40px #ff0040;
+      z-index: 1;
+      animation: laserPulse 2.5s ease-in-out infinite alternate;
+    }
+    .laser-line-h.top { top: 20%; }
+    .laser-line-h.center { top: 50%; }
+    .laser-line-h.bottom { bottom: 20%; }
+
+    .circuit-node {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      border: 3px solid #ff0040;
+      border-radius: 50%;
+      top: -5px;
+      box-shadow: 0 0 20px #ff0040;
+      animation: nodePulse 1.2s ease-in-out infinite alternate;
+    }
+    .node-1 { left: 18%; }
+    .node-2 { right: 18%; }
+
+    @keyframes laserPulse {
+      0% { opacity: 0.5; filter: brightness(0.9); }
+      100% { opacity: 1; filter: brightness(1.4); }
+    }
+
+    @keyframes nodePulse {
+      0% { transform: scale(0.85); }
+      100% { transform: scale(1.3); }
+    }
+
+    /* Stage 1: Split Login Card */
+    .split-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 760px;
+      min-height: 390px;
+      background: #140206;
+      border-radius: 26px;
+      border: 1.5px solid rgba(255, 30, 70, 0.4);
+      box-shadow: 0 0 60px rgba(255, 0, 60, 0.35), inset 0 0 35px rgba(0, 0, 0, 0.95);
+      display: flex;
+      overflow: hidden;
+    }
+
+    .split-left {
+      flex: 1.15;
+      padding: 50px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(60, 8, 20, 0.95) 0%, rgba(18, 2, 6, 0.95) 100%);
+      clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+      border-right: 1.5px solid rgba(255, 30, 70, 0.45);
+      z-index: 3;
+    }
+
+    .split-left h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .split-left h1 span { color: #ff1e46; }
+
+    .split-left p {
+      font-size: 13px;
+      color: #e3cad0;
+      margin-top: 14px;
+      line-height: 1.6;
+      max-width: 250px;
+    }
+
+    .split-right {
+      flex: 1;
+      padding: 40px 34px 34px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #100205;
+      z-index: 2;
+    }
+
+    .split-right h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .cyber-input {
+      width: 100%;
+      height: 50px;
+      background: #20060b;
+      border: 1.5px solid rgba(255, 30, 70, 0.35);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 12px;
+    }
+    .cyber-input svg { width: 18px; height: 18px; fill: #ff2a55; flex-shrink: 0; }
+    .cyber-input input { width: 100%; background: transparent; border: none; outline: none; color: #ffffff; font-size: 15px; }
+
+    .cyber-btn {
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(90deg, #ff1e46, #c7002e);
+      border: none;
+      border-radius: 25px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      box-shadow: 0 6px 25px rgba(255, 0, 55, 0.5);
+    }
+    .cyber-btn:active { transform: scale(0.97); }
+
+    /* Stage 2: OTP Card */
+    .otp-stage-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 440px;
+      background: #110d18;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(123, 44, 191, 0.2);
+      padding: 36px 26px;
+      text-align: center;
+      display: none;
+      animation: cardAppear 0.35s ease;
+    }
+
+    @keyframes cardAppear {
+      from { opacity: 0; transform: scale(0.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .otp-header-tag {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #8c7ea3;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .otp-title-main {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+
+    .pin-grid {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 15px 0 20px;
+    }
+
+    .pin-box {
+      width: 58px;
+      height: 68px;
+      background: #1b1626;
+      border-radius: 16px;
+      border: 1.5px solid rgba(138, 92, 245, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pin-box.active {
+      border-color: #8a5cf5;
+      box-shadow: 0 0 18px rgba(138, 92, 245, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .pin-box.filled {
+      border-color: #ff1e46;
+      background: rgba(255, 30, 70, 0.12);
+      animation: popDigit 0.22s ease forwards;
+    }
+
+    .pin-box.verified-box {
+      border-color: #06d6a0 !important;
+      background: rgba(6, 214, 160, 0.15) !important;
+      color: #06d6a0 !important;
+      box-shadow: 0 0 15px rgba(6, 214, 160, 0.4);
+      animation: popCheck 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .pin-box.error-box {
+      border-color: #ff0040 !important;
+      background: rgba(255, 0, 64, 0.15) !important;
+      color: #ff0040 !important;
+      box-shadow: 0 0 15px rgba(255, 0, 64, 0.4);
+    }
+
+    @keyframes popDigit {
+      0% { transform: scale(0.65); opacity: 0; }
+      70% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes popCheck {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .otp-status-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #8c7ea3;
+      margin-top: 10px;
+      min-height: 24px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8c7ea3;
+    }
+
+    .status-success { color: #06d6a0 !important; }
+    .status-success .status-dot { background: #06d6a0 !important; box-shadow: 0 0 10px #06d6a0; }
+
+    .status-error { color: #ff0040 !important; }
+    .status-error .status-dot { background: #ff0040 !important; box-shadow: 0 0 10px #ff0040; }
+
+    .error-custom-msg {
+      font-size: 12px;
+      color: #ff99ab;
+      margin-top: 12px;
+      line-height: 1.4;
+      display: none;
+    }
+
+    .btn-retry {
+      margin-top: 14px;
+      background: transparent;
+      border: 1px solid #ff1e46;
+      color: #ff1e46;
+      padding: 8px 18px;
+      border-radius: 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: none;
+    }
+
+    .shake {
+      animation: shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-2px, 0, 0); }
+      20%, 80% { transform: translate3d(4px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+      40%, 60% { transform: translate3d(6px, 0, 0); }
+    }
+
+    @media (max-width: 650px) {
+      .split-card { flex-direction: column; min-height: auto; }
+      .split-left { clip-path: none; border-right: none; border-bottom: 1.5px solid rgba(255, 30, 70, 0.35); padding: 30px 24px 20px; }
+      .split-left h1 { font-size: 24px; }
+      .split-right { padding: 25px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="laser-line-h top"></div>
+  <div class="laser-line-h center">
+    <div class="circuit-node node-1"></div>
+    <div class="circuit-node node-2"></div>
+  </div>
+  <div class="laser-line-h bottom"></div>
+
+  <!-- STAGE 1: LOGIN SPLIT CARD -->
+  <div class="split-card" id="stage1-card">
+    <div class="split-left">
+      <h1>HELLO, <br><span id="displayUsername">FRIEND!</span></h1>
+      <p>Enter your personal details to start your journey with us.</p>
+    </div>
+
+    <div class="split-right">
+      <h2>Verify</h2>
+
+      <div class="cyber-input">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <input type="text" id="authInputUser" readonly>
+      </div>
+
+      <div class="cyber-input">
+        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <input type="password" id="userEnteredPass" maxlength="4" placeholder="4-Digit Password">
+      </div>
+
+      <button class="cyber-btn" id="btnSubmit">Verify ➔</button>
+    </div>
+  </div>
+
+  <!-- STAGE 2: OTP VERIFICATION CARD -->
+  <div class="otp-stage-card" id="stage2-card">
+    <div class="otp-header-tag">SECURITY CHECK</div>
+    <div class="otp-title-main">Enter your code</div>
+
+    <div class="pin-grid">
+      <div class="pin-box" id="pbox-1"></div>
+      <div class="pin-box" id="pbox-2"></div>
+      <div class="pin-box" id="pbox-3"></div>
+      <div class="pin-box" id="pbox-4"></div>
+    </div>
+
+    <div class="otp-status-indicator" id="statusIndicator">
+      <div class="status-dot"></div>
+      <span id="statusText">Verifying 4-digit code...</span>
+    </div>
+
+    <p class="error-custom-msg" id="errorDetailMsg">Jisne aapko link bheja hai usse puchiye ki password kya hai.</p>
+    <button class="btn-retry" id="btnRetry">Try Again 🔄</button>
+  </div>
+
+  <script>
+    // ========================================================
+    // GLOBAL COMPACT WATER RIPPLE ENGINE (50px Sharp Wave)
+    // ========================================================
+    function createWaterWave(x, y) {
+      const ripple1 = document.createElement('span');
+      ripple1.className = 'water-ripple';
+      ripple1.style.left = x + 'px';
+      ripple1.style.top = y + 'px';
+      document.body.appendChild(ripple1);
+
+      const ripple2 = document.createElement('span');
+      ripple2.className = 'water-ripple-secondary';
+      ripple2.style.left = x + 'px';
+      ripple2.style.top = y + 'px';
+      document.body.appendChild(ripple2);
+
+      setTimeout(() => {
+        ripple1.remove();
+        ripple2.remove();
+      }, 750);
+    }
+
+    window.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      createWaterWave(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    window.addEventListener('click', (e) => {
+      createWaterWave(e.clientX, e.clientY);
+    });
+
+    // ========================================================
+    // CHECK STORAGE: Agar details nahi hain toh direct index.html bhej do
+    // ========================================================
+    const targetName = localStorage.getItem('wish_name');
+    const targetPin = localStorage.getItem('wish_pin');
+
+    if (!targetName || !targetPin) {
+      window.location.href = "index.html";
+    }
+
+    document.getElementById('displayUsername').innerText = targetName.toUpperCase() + "!";
+    document.getElementById('authInputUser').value = targetName;
+
+    const stage1Card = document.getElementById('stage1-card');
+    const stage2Card = document.getElementById('stage2-card');
+    const passInput = document.getElementById('userEnteredPass');
+    const statusIndicator = document.getElementById('statusIndicator');
+    const statusText = document.getElementById('statusText');
+    const errorDetail = document.getElementById('errorDetailMsg');
+    const retryBtn = document.getElementById('btnRetry');
+
+    const pboxes = [
+      document.getElementById('pbox-1'),
+      document.getElementById('pbox-2'),
+      document.getElementById('pbox-3'),
+      document.getElementById('pbox-4')
+    ];
+
+    document.getElementById('btnSubmit').addEventListener('click', () => {
+      const entered = passInput.value.trim();
+      if (entered.length < 4) {
+        stage1Card.classList.add('shake');
+        setTimeout(() => stage1Card.classList.remove('shake'), 450);
+        return;
+      }
+
+      stage1Card.style.display = 'none';
+      stage2Card.style.display = 'block';
+
+      runVideoVerification(entered);
+    });
+
+    function runVideoVerification(userCode) {
+      statusIndicator.className = 'otp-status-indicator';
+      statusText.innerText = 'Verifying 4-digit code...';
+      errorDetail.style.display = 'none';
+      retryBtn.style.display = 'none';
+
+      pboxes.forEach(b => {
+        b.innerText = '';
+        b.className = 'pin-box';
+      });
+
+      let idx = 0;
+      pboxes[0].classList.add('active');
+
+      const typingInterval = setInterval(() => {
+        if (idx < userCode.length) {
+          pboxes[idx].classList.remove('active');
+          pboxes[idx].innerText = userCode[idx];
+          pboxes[idx].classList.add('filled');
+          idx++;
+
+          if (idx < userCode.length) {
+            pboxes[idx].classList.add('active');
+          }
+        } else {
+          clearInterval(typingInterval);
+
+          setTimeout(() => {
+            if (userCode === targetPin) {
+              // Sahi Password: Saare boxes Green Checkmark
+              pboxes.forEach(b => {
+                b.className = 'pin-box verified-box';
+                b.innerText = '✓';
+              });
+
+              statusIndicator.className = 'otp-status-indicator status-success';
+              statusText.innerText = 'Code verified';
+
+              localStorage.setItem('wish_auth_passed', 'true');
+
+              // FIXED TIMING: 2.2 Seconds full display delay before going to wish page
+              setTimeout(() => {
+                window.location.href = "wish.html";
+              }, 2200);
+
+            } else {
+              // Galat Password
+              pboxes.forEach(b => {
+                b.className = 'pin-box error-box';
+              });
+
+              stage2Card.classList.add('shake');
+              setTimeout(() => stage2Card.classList.remove('shake'), 450);
+
+              statusIndicator.className = 'otp-status-indicator status-error';
+              statusText.innerText = 'Incorrect code, try again';
+              errorDetail.style.display = 'block';
+              retryBtn.style.display = 'inline-block';
+            }
+          }, 500);
+        }
+      }, 250);
+    }
+
+    retryBtn.addEventListener('click', () => {
+      passInput.value = '';
+      stage2Card.style.display = 'none';
+      stage1Card.style.display = 'flex';
+      passInput.focus();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+/* Container & Arc Layout */
+.balloon-stage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  min-height: 140px;
+  margin: 30px auto 20px;
+  position: relative;
+  padding: 10px 0;
+}
+
+/* 3D Realistic Balloons */
+.b3d {
+  width: 52px;
+  height: 68px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Knot niche */
+.b3d::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid rgba(255, 60, 100, 0.9);
+  transition: opacity 0.3s ease;
+}
+
+/* Natural Arc Curve (Video ke hisaab se) */
+.b3d:nth-child(1) { transform: translateY(-12px); }
+.b3d:nth-child(2) { transform: translateY(0px); }
+.b3d:nth-child(3) { transform: translateY(8px); }
+.b3d:nth-child(4) { transform: translateY(-6px); }
+.b3d:nth-child(5) { transform: translateY(-18px); }
+
+/* 3D Glossy Light Reflection (Gradient styling) */
+.b3d-pink1 {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffc2d1 25%, #ff85a1 70%, #f72585 100%);
+}
+.b3d-pink2 {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe5ec 25%, #ffb3c6 70%, #fb6f92 100%);
+}
+.b3d-white {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffffff 30%, #f0e6ef 70%, #e2cfea 100%);
+}
+.b3d-yellow {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fff3b0 25%, #ffd166 70%, #f48c06 100%);
+}
+.b3d-purple {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #e0c3fc 25%, #bb9af7 70%, #7b2cbf 100%);
+}
+
+/* Inner Text initially hidden */
+.b3d-txt {
+  opacity: 0;
+  font-size: 11px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: #d6336c;
+  pointer-events: none;
+  transform: scale(0.6);
+  transition: all 0.35s ease 0.15s;
+}
+
+/* State when clicked: Balloon morphs into soft glow pill with text inside */
+.b3d.revealed {
+  border-radius: 25px !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 182, 193, 0.8);
+  box-shadow: 0 4px 15px rgba(255, 77, 109, 0.25);
+  transform: translateY(0) scale(1.05) !important;
+}
+
+.b3d.revealed::after {
+  opacity: 0;
+}
+
+.b3d.revealed .b3d-txt {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Dark mode compatibility */
+[data-theme="dark"] .b3d.revealed {
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: #9d0208;
+}
