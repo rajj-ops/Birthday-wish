@@ -8,7 +8,7 @@ window.startBalloons = function() {
   
   const words = (typeof t !== 'undefined' && t && t.balloonWords) 
     ? t.balloonWords 
-    : ["Sundari ✨", "Buddhimati 💡", "Sweet Heart ❤️", "Kind Soul 🌸", "Priyatama 🥺"];
+    : ["Sundari ✨", "beautiful 💡", "Sweet Heart ❤️", "Kind Soul 🌸", "My Peace 🥺"];
 
   for (let i = 1; i <= 5; i++) {
     const txt = document.getElementById(`bTxt${i}`);
