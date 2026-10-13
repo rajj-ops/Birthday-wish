@@ -1,0 +1,69 @@
+/* FLIRTING SCREEN STYLES */
+.flirt-card-box {
+  background: var(--card-inner-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 24px;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(255, 42, 95, 0.15);
+}
+
+.flirt-heart-avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, #ff758f 50%, #e11d48 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 42, 95, 0.5);
+  animation: flirtPulse 1.6s infinite alternate;
+  user-select: none;
+  touch-action: manipulation;
+  transition: transform 0.15s ease;
+}
+
+.flirt-heart-avatar:active {
+  transform: scale(0.9);
+}
+
+@keyframes flirtPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1) rotate(4deg); }
+}
+
+.flirt-meter-container {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.flirt-meter-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff758f, #ff1e46);
+  border-radius: 10px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px #ff1e46;
+}
+
+.flirt-dialogue-box {
+  margin-top: 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}

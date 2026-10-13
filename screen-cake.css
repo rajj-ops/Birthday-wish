@@ -1,78 +1,198 @@
-.cake-wrapper {
+/* --- 3D CAKE WITH FRONT GOLD HEARTS & PERSONALIZED NAME --- */
+.cake-stage-container {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  margin: 15px 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Candle */
+.cake-candle-box {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.candle-flame {
+  width: 14px;
+  height: 22px;
+  background: radial-gradient(circle at 50% 80%, #ffffff 0%, #ffbe0b 40%, #fb5607 80%, transparent 100%);
+  border-radius: 50% 50% 25% 25%;
+  animation: candleFlicker 0.6s infinite alternate ease-in-out;
+  box-shadow: 0 0 16px #ffbe0b, 0 0 24px rgba(251, 86, 7, 0.6);
+}
+
+@keyframes candleFlicker {
+  0% { transform: scale(0.96) rotate(-2deg); }
+  100% { transform: scale(1.1) rotate(2deg); filter: drop-shadow(0 0 8px #ffbe0b); }
+}
+
+.candle-smoke {
+  display: none;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: smokeFly 0.9s forwards ease-out;
+}
+
+@keyframes smokeFly {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-30px) scale(3); opacity: 0; filter: blur(3px); }
+}
+
+.candle-stick {
+  width: 8px;
+  height: 34px;
+  background: repeating-linear-gradient(45deg, #ffffff, #ffffff 4px, #f43f5e 4px, #f43f5e 8px);
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Cake Body */
+.cake-structure {
   position: relative;
   width: 200px;
-  height: 160px;
-  margin: 25px auto 15px;
+  height: 145px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 4;
+  margin-bottom: 8px;
+  transition: transform 0.4s ease;
 }
 
-.cake-top {
-  width: 120px;
-  height: 40px;
-  background: #ffb3c6;
+/* Top Oval Disc */
+.tier-top {
+  width: 200px;
+  height: 60px;
+  background: radial-gradient(ellipse at center, #fff0f3 0%, #ffccd5 60%, #ff758f 100%);
   border-radius: 50%;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 -2px 6px rgba(0,0,0,0.12);
+}
+
+/* Top Name Icing */
+.cake-name-text {
   position: absolute;
   top: 15px;
-  left: 40px;
-  z-index: 2;
-}
-
-.candle {
-  width: 8px;
-  height: 30px;
-  background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff4d6d 5px, #ff4d6d 10px);
-  position: absolute;
-  top: -24px;
-  left: 56px;
-  border-radius: 3px;
-}
-
-.flame {
-  width: 10px;
-  height: 14px;
-  background: #ffaa00;
-  border-radius: 50% 50% 20% 20%;
-  position: absolute;
-  top: -12px;
-  left: -1px;
-  animation: flicker 0.6s infinite alternate;
-}
-
-@keyframes flicker {
-  from { transform: scale(1); opacity: 0.9; }
-  to { transform: scale(1.15); opacity: 1; }
-}
-
-.cake-body {
-  width: 200px;
-  height: 100px;
-  background: #fb6f92;
-  border-radius: 0 0 30px 30px;
-  position: absolute;
-  bottom: 0;
-  overflow: hidden;
-  box-shadow: inset 0 -15px 0 #ff4d6d;
-}
-
-.cut-indicator {
-  position: absolute;
-  top: 0;
   left: 50%;
-  width: 2px;
-  height: 100%;
-  border-left: 2px dashed #ffffff;
   transform: translateX(-50%);
-  opacity: 0.8;
+  width: 90%;
+  text-align: center;
+  font-family: 'Sacramento', cursive;
+  font-size: 18px;
+  font-weight: 700;
+  color: #d4af37;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 0 10px rgba(255, 215, 0, 0.6);
+  z-index: 6;
+  pointer-events: none;
+  line-height: 1.15;
+}
+
+/* Front Tall Wall */
+.tier-base {
+  width: 200px;
+  height: 90px;
+  background: linear-gradient(180deg, #ff758f 0%, #e11d48 45%, #9f1239 100%);
+  border-radius: 0 0 100px 100px / 0 0 32px 32px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+/* Front Decorative Layer */
+.cake-front-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gold-acrylic-hearts {
+  position: absolute;
+  width: 58px;
+  height: 52px;
+  bottom: 12px;
+  right: 18px;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.45));
+  transform: rotate(-10deg);
+}
+
+/* Pearl Sprinkles */
+.cake-pearls {
+  position: absolute;
+  inset: 0;
+}
+.pearl {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ffe4e6 55%, #f43f5e 100%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.p1 { width: 5px; height: 5px; top: 38px; left: 24px; }
+.p2 { width: 4px; height: 4px; top: 50px; left: 40px; }
+.p3 { width: 6px; height: 6px; top: 62px; left: 28px; }
+.p4 { width: 4px; height: 4px; top: 44px; right: 80px; }
+.p5 { width: 5px; height: 5px; top: 58px; right: 90px; }
+
+/* Base Plate */
+.cake-plate {
+  position: absolute;
+  bottom: 0px;
+  width: 240px;
+  height: 48px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.06) 70%, transparent 100%);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 1;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Laser Knife */
+.cut-laser-knife {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  width: 3px;
+  height: 0%;
+  background: linear-gradient(to bottom, #ffd700, #ffffff, #f43f5e);
+  transform: translateX(-50%);
+  box-shadow: 0 0 14px #ffd700;
+  z-index: 9;
+  border-radius: 2px;
+  transition: height 0.05s linear;
+}
+
+/* Cut Complete Animation */
+.cake-structure.cut-done {
+  animation: cakePartSplit 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cakePartSplit {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.96) translateY(2px); }
+  100% { transform: scale(1.02); filter: drop-shadow(0 0 18px rgba(244, 63, 94, 0.5)); }
 }
 
 .cake-slider {
   width: 100%;
-  margin: 15px 0;
-  accent-color: var(--accent-color);
+  margin: 18px 0 10px;
+  accent-color: #f43f5e;
   cursor: pointer;
-}
-
-.status-note {
-  font-size: 13px;
-  opacity: 0.8;
-  margin-top: 5px;
 }

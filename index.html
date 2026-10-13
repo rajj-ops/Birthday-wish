@@ -6,7 +6,10 @@
   <title>Birthday Wish Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Sacramento&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/screen-balloon.css">
+  <link rel="stylesheet" href="css/screen-flirt.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Sacramento&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -400,74 +403,111 @@
     .b3d.revealed { border-radius: 25px; background: rgba(255, 255, 255, 0.9) !important; }
     .b3d.revealed .b3d-txt { opacity: 1; }
 
-    .cake-wrapper {
+    /* REALISTIC 3D CYLINDRICAL CAKE STYLING */
+    .cake-wrapper-3d {
       position: relative;
-      width: 180px;
-      height: 160px;
-      margin: 25px auto 15px;
+      width: 220px;
+      height: 190px;
+      margin: 20px auto 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
     }
-    .candle {
-      width: 10px;
-      height: 35px;
-      background: repeating-linear-gradient(45deg, #fff, #fff 4px, #ff3366 4px, #ff3366 8px);
+    .candle-3d {
       position: absolute;
-      top: 10px;
-      border-radius: 4px;
-      z-index: 5;
-      box-shadow: 0 0 10px rgba(255,51,102,0.4);
+      top: 5px;
+      width: 9px;
+      height: 38px;
+      background: repeating-linear-gradient(45deg, #ffd166, #ffd166 6px, #ffffff 6px, #ffffff 12px);
+      border-radius: 4px 4px 0 0;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(255,209,102,0.5);
     }
-    .flame {
-      width: 12px;
-      height: 16px;
-      background: linear-gradient(to top, #ff6600, #ffcc00, #ffffff);
-      border-radius: 50% 50% 20% 20%;
+    .flame-3d {
+      width: 14px;
+      height: 22px;
+      background: radial-gradient(ellipse at bottom, #fff 0%, #facc15 45%, #ff4d00 85%);
+      border-radius: 50% 50% 35% 35%;
       position: absolute;
-      top: -14px;
-      left: -1px;
-      animation: flicker 0.5s infinite alternate;
-      box-shadow: 0 0 12px #ffaa00;
+      top: -18px;
+      left: -2.5px;
+      box-shadow: 0 0 16px #ff7300, 0 0 28px #facc15;
+      animation: flicker 0.7s infinite alternate;
     }
     @keyframes flicker {
-      from { transform: scale(1) rotate(-2deg); opacity: 0.9; }
-      to { transform: scale(1.15) rotate(2deg); opacity: 1; }
+      from { transform: scale(1) rotate(-1.5deg); opacity: 0.95; }
+      to { transform: scale(1.1) rotate(1.5deg); opacity: 1; }
     }
-    .cake-top-layer {
-      width: 150px;
-      height: 45px;
-      background: linear-gradient(135deg, #ff8fa3, #ffb3c6);
-      border-radius: 50%;
+    .cylinder-cake {
       position: relative;
-      z-index: 4;
-      box-shadow: inset 0 -4px 8px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.08);
+      width: 200px;
+      height: 115px;
     }
-    .cake-body-layer {
-      width: 170px;
-      height: 85px;
-      background: linear-gradient(135deg, #ff4d6d, #ff758c);
-      border-radius: 0 0 35px 35px;
-      position: relative;
-      z-index: 3;
-      margin-top: -22px;
-      box-shadow: inset 0 10px 15px rgba(255,255,255,0.25), 0 10px 25px rgba(255, 77, 109, 0.25);
-      overflow: hidden;
-    }
-    .cake-body-layer::before {
-      content: '';
+    .cake-top-disc {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 18px;
-      background: #ffffff;
-      border-radius: 0 0 15px 15px;
-      opacity: 0.9;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+      width: 200px;
+      height: 65px;
+      background: radial-gradient(ellipse at center, #ff8fa3 0%, #ff4d6d 75%, #c9184a 100%);
+      border-radius: 50%;
+      box-shadow: inset 0 4px 10px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
     }
-    .cut-indicator {
+    .cake-top-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.35);
+      transform: translateY(-4px);
+    }
+    .cake-wall {
+      position: absolute;
+      top: 32px;
+      left: 0;
+      width: 200px;
+      height: 80px;
+      background: linear-gradient(180deg, #ff4d6d 0%, #a4133c 70%, #590d22 100%);
+      border-radius: 0 0 100px 100px / 0 0 40px 40px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+    }
+    .gold-heart-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(255,215,0,0.95), rgba(218,165,32,0.85));
+      border: 1.5px solid #fff8dc;
+      padding: 5px 12px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.8);
+      transform: translateY(6px);
+    }
+    .gold-heart-badge span {
+      font-size: 11px;
+      font-weight: 800;
+      color: #4a3400;
+      letter-spacing: 0.5px;
+    }
+    .pearl-dot {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: radial-gradient(circle at 30% 30%, #fff, #e2e8f0);
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .cut-line-indicator {
       position: absolute;
       top: 0;
       left: 50%;
@@ -475,7 +515,7 @@
       height: 100%;
       border-left: 2px dashed rgba(255,255,255,0.8);
       transform: translateX(-50%);
-      z-index: 6;
+      z-index: 8;
     }
     .cake-slider {
       width: 100%;
@@ -547,7 +587,7 @@
     .wish-front .tap-btn-pill {
       background: var(--card-bg);
       color: var(--accent-color);
-      padding: 7px 18px;
+       padding: 7px 18px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: 700;
@@ -624,8 +664,11 @@
 
   <!-- Top Navbar -->
   <div class="top-navbar">
-    <span style="font-weight:700;">Birthday Studio ✨</span>
-    <button id="themeToggleBtn" class="theme-btn" onclick="toggleTheme()">☀️ Light</button>
+    <span>Birthday Studio ✨</span>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <button id="flirtToggleBtn" class="theme-btn" style="display: none;" onclick="toggleFlirtMode()">💖 Flirt: OFF</button>
+      <button id="themeToggleBtn" class="theme-btn" onclick="toggleTheme()">☀️ Light</button>
+    </div>
   </div>
 
   <!-- Cyberpunk Laser Circuits -->
@@ -696,6 +739,7 @@
 
     <button class="primary-btn" id="btnConfirmTheme">Start Verification ➔</button>
   </div>
+
   <!-- SCREEN 3: CYBERPUNK LOGIN CARD -->
   <div class="split-card" id="screen-login">
     <div class="split-left">
@@ -766,7 +810,7 @@
     <button class="primary-btn" id="btnContinueFromAge" style="display: none;">Continue to Surprise ➔</button>
   </div>
 
-  <!-- SCREEN 8: 12 THINGS I LOVE (FROSTED GLASS) -->
+  <!-- SCREEN 8: 12 THINGS I LOVE -->
   <div class="app-screen" id="screen-flip">
     <h3 style="font-size: 24px; font-family: 'Sacramento', cursive; color: var(--accent-color); margin-bottom: 16px;" id="txtFlipTitle">12 Things I Love</h3>
     <div class="flip-container">
@@ -785,38 +829,172 @@
     <button id="btnNextReason" class="primary-btn">Next Reason ➔</button>
   </div>
 
-  <!-- SCREEN 9: 3D BALLOONS -->
-  <div class="app-screen" id="screen-balloon">
-    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 4px;" id="txtBalloonTitle">Pop the Balloons</h2>
-    <p style="font-size: 13px; opacity: 0.8; margin-bottom: 12px;" id="txtBalloonSub">Tap to see what I think of you ❤️</p>
-    <div class="balloon-stage">
-      <div class="b3d b3d-pink1"><span class="b3d-txt"></span></div>
-      <div class="b3d b3d-pink2"><span class="b3d-txt"></span></div>
-      <div class="b3d b3d-white"><span class="b3d-txt"></span></div>
-      <div class="b3d b3d-yellow"><span class="b3d-txt"></span></div>
-      <div class="b3d b3d-purple"><span class="b3d-txt"></span></div>
-    </div>
-    <button id="balloonNextBtn" class="primary-btn" style="display:none;">Cake Time 🎂</button>
-  </div>
+  <!-- SCREEN 9: 3D ORGANIC FLOATING BALLOONS -->
+  <div class="app-screen" id="screen-balloon" style="text-align: center; position: relative; z-index: 50;">
+    <style>
+      @keyframes floatBalloon1 { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-18px) rotate(2deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+      @keyframes floatBalloon2 { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-22px) rotate(-3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+      @keyframes floatBalloon3 { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-16px) rotate(2.5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+      @keyframes floatBalloon4 { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(-2deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+      @keyframes floatBalloon5 { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-24px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
 
-  <!-- SCREEN 10: CAKE CUTTING -->
-  <div class="app-screen" id="screen-cake">
-    <h2 style="font-size: 20px; font-weight: 700;" id="txtCakeTitle">Make a Wish! 🎂</h2>
-    <div class="cake-wrapper">
-      <div class="candle"><div class="flame"></div></div>
-      <div class="cake-top-layer"></div>
-      <div class="cake-body-layer">
-        <div class="cut-indicator"></div>
+      .anim-float-1 { animation: floatBalloon1 3.5s ease-in-out infinite !important; }
+      .anim-float-2 { animation: floatBalloon2 4.2s ease-in-out infinite !important; }
+      .anim-float-3 { animation: floatBalloon3 3.2s ease-in-out infinite !important; }
+      .anim-float-4 { animation: floatBalloon4 3.8s ease-in-out infinite !important; }
+      .anim-float-5 { animation: floatBalloon5 4.5s ease-in-out infinite !important; }
+
+      .balloon-sphere {
+        width: 60px !important;
+        height: 78px !important;
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: inset -6px -8px 14px rgba(0,0,0,0.45), inset 6px 8px 12px rgba(255,255,255,0.45), 0 10px 22px rgba(0,0,0,0.35) !important;
+        transition: all 0.25s ease !important;
+        cursor: pointer !important;
+      }
+
+      .balloon-wire {
+        width: 1.5px !important;
+        height: 48px !important;
+        background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.1)) !important;
+        pointer-events: none !important;
+      }
+
+      .balloon-hidden-text {
+        display: none;
+        font-size: 13px !important;
+        font-weight: 800 !important;
+        color: #be123c !important;
+        white-space: nowrap !important;
+      }
+
+      .balloon-revealed .balloon-sphere {
+        width: auto !important;
+        min-width: 100px !important;
+        height: 40px !important;
+        padding: 0 16px !important;
+        border-radius: 20px !important;
+        background: #ffffff !important;
+        border: 2.5px solid #ff2a5f !important;
+        box-shadow: 0 0 20px rgba(255, 42, 95, 0.7), 0 4px 12px rgba(0,0,0,0.3) !important;
+      }
+
+      .balloon-revealed .balloon-hidden-text { display: block !important; }
+      .balloon-revealed .balloon-wire { display: none !important; }
+    </style>
+
+    <div style="font-size: 11px; letter-spacing: 2px; color: #f59e0b; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">SURPRISE PROTOCOL</div>
+    <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 4px;" id="txtBalloonTitle">Balloons Phutantu 🎈</h2>
+    <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 10px;" id="txtBalloonSub">Tap kari dekhantu mora mana katha ❤️</p>
+    
+    <div style="position: relative; width: 100%; height: 320px; margin: 15px auto 10px; pointer-events: auto;">
+      <div id="bItem1" class="anim-float-1" onclick="handlePop(1)" style="position: absolute; left: 8%; top: 35px; cursor: pointer; display: flex; flex-direction: column; align-items: center; z-index: 60;">
+        <div id="bSphere1" class="balloon-sphere" style="background: radial-gradient(circle at 35% 30%, #fff 0%, #ff5c8a 45%, #d90429 100%);">
+          <span class="balloon-hidden-text" id="bWord1">Sundari ✨</span>
+        </div>
+        <div class="balloon-wire" id="bWire1"></div>
+      </div>
+
+      <div id="bItem2" class="anim-float-2" onclick="handlePop(2)" style="position: absolute; left: 56%; top: 25px; cursor: pointer; display: flex; flex-direction: column; align-items: center; z-index: 60;">
+        <div id="bSphere2" class="balloon-sphere" style="background: radial-gradient(circle at 35% 30%, #fff 0%, #ffd166 45%, #d48b00 100%);">
+          <span class="balloon-hidden-text" id="bWord2">Buddhimati 💡</span>
+        </div>
+        <div class="balloon-wire" id="bWire2"></div>
+      </div>
+
+      <div id="bItem3" class="anim-float-3" onclick="handlePop(3)" style="position: absolute; left: 68%; top: 120px; cursor: pointer; display: flex; flex-direction: column; align-items: center; z-index: 60;">
+        <div id="bSphere3" class="balloon-sphere" style="background: radial-gradient(circle at 35% 30%, #fff 0%, #60a5fa 45%, #1d4ed8 100%);">
+          <span class="balloon-hidden-text" id="bWord3">Sweet Heart ❤️</span>
+        </div>
+        <div class="balloon-wire" id="bWire3"></div>
+      </div>
+
+      <div id="bItem4" class="anim-float-4" onclick="handlePop(4)" style="position: absolute; left: 40%; top: 160px; cursor: pointer; display: flex; flex-direction: column; align-items: center; z-index: 60;">
+        <div id="bSphere4" class="balloon-sphere" style="background: radial-gradient(circle at 35% 30%, #fff 0%, #4ade80 45%, #15803d 100%);">
+          <span class="balloon-hidden-text" id="bWord4">Kind Soul 🌸</span>
+        </div>
+        <div class="balloon-wire" id="bWire4"></div>
+      </div>
+
+      <div id="bItem5" class="anim-float-5" onclick="handlePop(5)" style="position: absolute; left: 14%; top: 200px; cursor: pointer; display: flex; flex-direction: column; align-items: center; z-index: 60;">
+        <div id="bSphere5" class="balloon-sphere" style="background: radial-gradient(circle at 35% 30%, #fff 0%, #c084fc 45%, #7e22ce 100%);">
+          <span class="balloon-hidden-text" id="bWord5">Priyatama 🥺</span>
+        </div>
+        <div class="balloon-wire" id="bWire5"></div>
       </div>
     </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); font-size: 13px; font-weight: 600; margin-top: 10px;">
+      <span style="color: var(--subtext-color);">Discovered</span>
+      <span id="balloonCounterNum" style="color: #f59e0b; font-weight: 800; font-size: 14px;">0 / 5</span>
+    </div>
+
+    <button id="balloonNextBtn" class="primary-btn" style="display: none; margin-top: 15px;" onclick="switchScreen('screen-balloon', 'screen-cake'); if(typeof startCake==='function') startCake();">Cake Time 🎂</button>
+
+    <script>
+      var poppedState = {};
+      var totalPoppedCount = 0;
+
+      function handlePop(num) {
+        if (poppedState[num]) return;
+        poppedState[num] = true;
+        totalPoppedCount++;
+
+        var item = document.getElementById('bItem' + num);
+        if (item) {
+          item.className = 'balloon-revealed';
+        }
+
+        var counter = document.getElementById('balloonCounterNum');
+        if (counter) {
+          counter.innerText = totalPoppedCount + ' / 5';
+        }
+
+        if (totalPoppedCount >= 5) {
+          var btn = document.getElementById('balloonNextBtn');
+          if (btn) btn.style.display = 'block';
+        }
+      }
+    </script>
+  </div>
+
+  <!-- SCREEN 10: REALISTIC 3D CAKE CUTTING -->
+  <div class="app-screen" id="screen-cake">
+    <h2 style="font-size: 20px; font-weight: 700;" id="txtCakeTitle">Make a Wish! 🎂</h2>
+    
+    <div class="cake-wrapper-3d">
+      <div class="candle-3d"><div class="flame-3d"></div></div>
+      <div class="cylinder-cake">
+        <div class="cake-top-disc">
+          <span class="cake-top-text" id="cakeDynamicText">Happy Birthday Babu ✨</span>
+        </div>
+        
+        <div class="cake-wall">
+          <div class="cut-line-indicator"></div>
+          <div class="gold-heart-badge">
+            <span style="font-size: 13px;">💛</span>
+            <span id="goldHeartUsername">Babu</span>
+            <span style="font-size: 13px;">💛</span>
+          </div>
+          <div class="pearl-dot" style="top: 15px; left: 25px;"></div>
+          <div class="pearl-dot" style="top: 42px; left: 45px;"></div>
+          <div class="pearl-dot" style="top: 18px; right: 30px;"></div>
+          <div class="pearl-dot" style="top: 48px; right: 48px;"></div>
+        </div>
+      </div>
+    </div>
+
     <p id="cakeStatusText" style="font-size: 13px; opacity: 0.8; margin-top: 5px;">Slider tikh kari cake cut karantu</p>
     <input type="range" id="cakeCutSlider" class="cake-slider" value="0" min="0" max="100">
     <button id="cakeNextBtn" class="primary-btn" style="display:none;">See Birthday Wishes 💌</button>
   </div>
   <!-- SCREEN 11: VERTICAL FLIP BIRTHDAY WISHES -->
   <div class="app-screen wish-scroll-card" id="screen-wishes-vertical">
-    <h2 style="font-size: 22px; font-weight: 800; color: var(--accent-color);">Flip these birthday wishes</h2>
-    <p style="font-size: 12.5px; color: var(--subtext-color); margin-top: 4px;">Each card holds a special message. 🥺💖</p>
+    <h2 id="wishScreenTitle" style="font-size: 22px; font-weight: 800; color: var(--accent-color);">Flip these birthday wishes</h2>
+    <p id="wishScreenSubtitle" style="font-size: 12.5px; color: var(--subtext-color); margin-top: 4px;">Each card holds a special message. 🥺💖</p>
 
     <div class="vertical-flip-list">
       <div class="wish-flip-card" data-card-id="1" onclick="flipWish(this)">
@@ -827,7 +1005,7 @@
             <div class="tap-btn-pill">Tap me ➔</div>
           </div>
           <div class="wish-back">
-            <div><strong>**Special Message ❤️**</strong><br><span id="wishMsg1">Happy Birthday! You are my biggest blessing and constant support. I'm so grateful for everything you do. 🥺💖</span></div>
+            <div><strong>Special Message ❤️</strong><br><span id="wishMsg1">Happy Birthday! You are my biggest blessing and constant support. I'm so grateful for everything you do. 🥺💖</span></div>
             <span class="back-flip-tag">Tap to flip back</span>
           </div>
         </div>
@@ -841,7 +1019,7 @@
             <div class="tap-btn-pill">Tap me ➔</div>
           </div>
           <div class="wish-back">
-            <div><strong>**Emotional Heart ❤️**</strong><br><span id="wishMsg2">You are the reason behind my smiles. May your life always be filled with endless love, peace, and beautiful moments. 🥰✨</span></div>
+            <div><strong>Emotional Heart ❤️</strong><br><span id="wishMsg2">You are the reason behind my smiles. May your life always be filled with endless love, peace, and beautiful moments. 🥰✨</span></div>
             <span class="back-flip-tag">Tap to flip back</span>
           </div>
         </div>
@@ -855,7 +1033,7 @@
             <div class="tap-btn-pill">Tap me ➔</div>
           </div>
           <div class="wish-back">
-            <div><strong>**Forever Bond ✨**</strong><br><span id="wishMsg3">Always stay happy, healthy and smiling. I love you more than words can ever express! ❤️✨</span></div>
+            <div><strong>Forever Bond ✨</strong><br><span id="wishMsg3">Always stay happy, healthy and smiling. I love you more than words can ever express! ❤️✨</span></div>
             <span class="back-flip-tag">Tap to flip back</span>
           </div>
         </div>
@@ -895,9 +1073,224 @@
       <p style="margin-top: 20px;">With all my love,<br><strong style="font-size: 15px; font-family: 'Sacramento', cursive;">Your Forever ❤️</strong></p>
     </div>
 
-    <button class="primary-btn" style="margin-top: 22px;" onclick="location.reload()">Replay Celebration 🔄</button>
+    <button id="btnLetterNext" class="primary-btn" style="margin-top: 22px;" onclick="goToProposalScreen()">Aage badhein ➔</button>
+    <button id="btnReplayLetter" class="theme-btn" style="margin-top: 10px; width: 100%;" onclick="location.reload()">Replay Celebration 🔄</button>
   </div>
 
+  <!-- CUSTOM THEME TEASER POP-UP -->
+  <div id="teaserCustomPopup" style="display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--card-inner-bg); border: 2px solid var(--accent-color); border-radius: 28px; padding: 26px 20px; max-width: 340px; text-align: center; box-shadow: 0 15px 40px rgba(255, 30, 70, 0.4); animation: fadeIn 0.3s ease;">
+      <div style="font-size: 38px; margin-bottom: 8px;">🤭❤️</div>
+      <h3 style="font-size: 18px; font-weight: 800; color: var(--accent-color); margin-bottom: 10px;">Are you sure continue karna chahte ho?</h3>
+      <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
+        Yahan se aage sirf birthday wish nahi, kuch aur bhi hai jisse aapke chehre pe smile aayega... Toh kya aap ready ho? 😉✨
+      </p>
+      <div style="display: flex; gap: 12px;">
+        <button class="theme-btn" style="flex: 1; margin: 0;" onclick="closeTeaserPopup()">Cancel</button>
+        <button class="primary-btn" style="flex: 1; margin: 0;" onclick="confirmTeaserProceed()">Ready! 🥰</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 13: PLAYFUL PROPOSAL & SECRET PASSWORD -->
+  <div class="app-screen" id="screen-proposal-game" style="text-align: center;">
+    <div style="font-size: 40px; margin-bottom: 8px;">🥺💍</div>
+    <h2 style="font-family: 'Sacramento', cursive; font-size: 34px; color: var(--accent-color); margin-bottom: 12px; text-shadow: 0 0 15px rgba(255, 42, 95, 0.4);">Do you love me? ❤️</h2>
+    <p id="proposalDialogText" class="card-subtitle" style="margin-bottom: 24px; min-height: 60px; line-height: 1.6; font-size: 14.5px; padding: 0 10px;">
+      Maan bhi jao na meri cutie! Itni pyari ho, itna nakhra thodi suit karta hai... 😉❤️
+    </p>
+
+    <!-- Playful Buttons Container -->
+    <div id="proposalBtnBox" style="position: relative; min-height: 90px; display: flex; justify-content: center; gap: 16px; align-items: center; margin-bottom: 16px;">
+      <button id="btnSayYes" class="primary-btn" style="width: auto; padding: 12px 32px; margin: 0;" onclick="handleProposalYes()">YES! ❤️</button>
+      <button id="btnRunNo" class="theme-btn" style="width: auto; padding: 12px 28px; border-color: #ff0040; color: #ff4d6d; transition: all 0.25s ease;" onmouseover="handleProposalNo()" onclick="handleProposalNo()">NO 😜</button>
+    </div>
+
+    <!-- Hidden Heart Password Section -->
+    <div id="heartPassSection" style="display: none; animation: fadeIn 0.4s ease; margin-top: 18px;">
+      <div style="font-size: 15px; font-weight: 700; color: #ff2a5f; margin-bottom: 6px;">Hehe, Pakde Gaye! She Said YES! 💍🥰🎉</div>
+      <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 16px; line-height: 1.5;">
+        Hehe, aakhirkar maan hi gayi meri cutie! 🥰 Ab chalo jaldi se apne dil ke andar aane ka ek secret password yahan set karo...<br>
+        <span style="font-size: 11px; opacity: 0.85;">Tension mat lo, yeh password poori tarah safe hai, yahan koi nahi dekh sakta! 🤫💖</span>
+      </p>
+      
+      <div class="cyber-input" style="margin-bottom: 14px;">
+        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <input type="text" id="heartSecretPassword" placeholder="Dil ka secret password yahan likho... 🔐">
+      </div>
+
+      <button class="primary-btn" onclick="submitHeartPassword()">Confirm Password ✨</button>
+    </div>
+  </div>
+
+  <!-- FINAL CLIMAX DM POP-UP -->
+  <div id="finalDmPopup" style="display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--card-inner-bg); border: 2px solid var(--accent-color); border-radius: 28px; padding: 26px 20px; max-width: 360px; text-align: center; box-shadow: 0 15px 40px rgba(255, 30, 70, 0.4); animation: fadeIn 0.35s ease;">
+      <h2 style="font-size: 22px; font-weight: 800; color: var(--accent-color); margin-bottom: 8px;">Mission Accomplished! 😏🔥</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-color); margin-bottom: 18px;">
+        Arey waah! Haan bhi bol diya aur dil ka secret password bhi enter kar diya? <br><br>
+        Lekin aise kaam thodi chalega! Ab jaldi se mujhe DM mein aakar batao ki wo password kya hai, varna dil ka lock kaise khulega? 😉❤️
+      </p>
+      <button class="primary-btn" onclick="sendInDM()">Send in Instagram DM 📸💌</button>
+      <button class="theme-btn" style="margin-top: 10px; width: 100%;" onclick="document.getElementById('finalDmPopup').style.display='none'">Close & Replay 🔄</button>
+    </div>
+  </div>
+
+  <!-- Secret Mode Toast Notification -->
+  <div id="flirtHintToast" style="display: none; position: fixed; top: 65px; right: 20px; z-index: 9999; background: rgba(30, 4, 15, 0.95); border: 1.5px solid #ff2a5f; padding: 12px 16px; border-radius: 16px; box-shadow: 0 10px 25px rgba(255, 42, 95, 0.4); max-width: 260px; text-align: left; animation: fadeIn 0.4s ease;">
+    <div style="font-size: 12px; font-weight: 800; color: #ff2a5f; margin-bottom: 4px;">✨ Secret Mode Unlocked!</div>
+    <div style="font-size: 11px; color: #f7f7fb; line-height: 1.4;">Upar Flirt option on karke dekho, letter ka andaaz badal jayega... 😉🔥</div>
+  </div>
+  <!-- SCREEN 11: VERTICAL FLIP BIRTHDAY WISHES -->
+  <div class="app-screen wish-scroll-card" id="screen-wishes-vertical">
+    <h2 id="wishScreenTitle" style="font-size: 22px; font-weight: 800; color: var(--accent-color);">Flip these birthday wishes</h2>
+    <p id="wishScreenSubtitle" style="font-size: 12.5px; color: var(--subtext-color); margin-top: 4px;">Each card holds a special message. 🥺💖</p>
+
+    <div class="vertical-flip-list">
+      <div class="wish-flip-card" data-card-id="1" onclick="flipWish(this)">
+        <div class="wish-flip-inner">
+          <div class="wish-front">
+            <span class="badge-num">01</span>
+            <div class="card-art">🎂</div>
+            <div class="tap-btn-pill">Tap me ➔</div>
+          </div>
+          <div class="wish-back">
+            <div><strong>Special Message ❤️</strong><br><span id="wishMsg1">Happy Birthday! You are my biggest blessing and constant support. I'm so grateful for everything you do. 🥺💖</span></div>
+            <span class="back-flip-tag">Tap to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wish-flip-card" data-card-id="2" onclick="flipWish(this)">
+        <div class="wish-flip-inner">
+          <div class="wish-front">
+            <span class="badge-num">02</span>
+            <div class="card-art">🐱✨</div>
+            <div class="tap-btn-pill">Tap me ➔</div>
+          </div>
+          <div class="wish-back">
+            <div><strong>Emotional Heart ❤️</strong><br><span id="wishMsg2">You are the reason behind my smiles. May your life always be filled with endless love, peace, and beautiful moments. 🥰✨</span></div>
+            <span class="back-flip-tag">Tap to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wish-flip-card" data-card-id="3" onclick="flipWish(this)">
+        <div class="wish-flip-inner">
+          <div class="wish-front">
+            <span class="badge-num">03</span>
+            <div class="card-art">🎁🐾</div>
+            <div class="tap-btn-pill">Tap me ➔</div>
+          </div>
+          <div class="wish-back">
+            <div><strong>Forever Bond ✨</strong><br><span id="wishMsg3">Always stay happy, healthy and smiling. I love you more than words can ever express! ❤️✨</span></div>
+            <span class="back-flip-tag">Tap to flip back</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="btnAllWishesDiscovered" class="primary-btn" style="margin-top: 22px; display: none;">All wishes discovered ✨</button>
+  </div>
+
+  <!-- SCREEN 12: FINAL ROMANTIC PROPOSAL LETTER -->
+  <div class="app-screen letter-card-box" id="screen-final-letter">
+    <div style="text-align: center; margin-bottom: 6px;">
+      <span style="font-size: 32px;">🥺💖</span>
+    </div>
+
+    <div class="macos-header">
+      <div class="macos-dots">
+        <div class="macos-dot dot-red"></div>
+        <div class="macos-dot dot-yellow"></div>
+        <div class="macos-dot dot-green"></div>
+      </div>
+      <div class="macos-title" id="macosFileTitle">BABU-LETTER.TXT</div>
+      <div class="macos-close">CLOSE</div>
+    </div>
+
+    <div class="letter-content">
+      <p style="font-size: 18px; font-weight: 800; color: var(--accent-color); font-family: 'Sacramento', cursive;" id="letterDearTitle">Dear <span class="highlight-name" id="letterTargetName">Babu</span>,</p>
+      
+      <p id="letterPara1">Happy Birthday to the gorgeous person jo meri life ko itna special aur haseen banati hai. Sach kahun toh tum sirf meri pasand nahi, meri aadat ban chuki ho. 😉❤️</p>
+      
+      <p id="letterPara2">Ye website maine sirf aur sirf tumhare liye kitni mehnat aur pyaar se banayi hai, taaki tumhare chehre par ek pyaari si muskaan la sakoon. ✨</p>
+      
+      <p id="letterPara3">Ab maan jao na! Jaldi se mere is proposal ke reply mein 'Haan' bol do, taaki hum hamesha ke liye ek ho jayein. Main tumse wada karta hoon ki jindagi bhar kabhi tumhara saath nahi chhodunga. 🤝💕</p>
+      
+      <p style="font-weight: 700; color: var(--accent-color); margin-top: 16px;" id="letterProposalLine">Maan jao na, <span id="letterPetName">babu</span>! Dil mat todo yaar! 🥺💍</p>
+
+      <p style="margin-top: 20px;">With all my love,<br><strong style="font-size: 15px; font-family: 'Sacramento', cursive;">Your Forever ❤️</strong></p>
+    </div>
+
+    <button id="btnLetterNext" class="primary-btn" style="margin-top: 22px;" onclick="goToProposalScreen()">Aage badhein ➔</button>
+    <button id="btnReplayLetter" class="theme-btn" style="margin-top: 10px; width: 100%;" onclick="location.reload()">Replay Celebration 🔄</button>
+  </div>
+
+  <!-- CUSTOM THEME TEASER POP-UP -->
+  <div id="teaserCustomPopup" style="display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--card-inner-bg); border: 2px solid var(--accent-color); border-radius: 28px; padding: 26px 20px; max-width: 340px; text-align: center; box-shadow: 0 15px 40px rgba(255, 30, 70, 0.4); animation: fadeIn 0.3s ease;">
+      <div style="font-size: 38px; margin-bottom: 8px;">🤭❤️</div>
+      <h3 style="font-size: 18px; font-weight: 800; color: var(--accent-color); margin-bottom: 10px;">Are you sure continue karna chahte ho?</h3>
+      <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
+        Yahan se aage sirf birthday wish nahi, kuch aur bhi hai jisse aapke chehre pe smile aayega... Toh kya aap ready ho? 😉✨
+      </p>
+      <div style="display: flex; gap: 12px;">
+        <button class="theme-btn" style="flex: 1; margin: 0;" onclick="closeTeaserPopup()">Cancel</button>
+        <button class="primary-btn" style="flex: 1; margin: 0;" onclick="confirmTeaserProceed()">Ready! 🥰</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 13: PLAYFUL PROPOSAL & SECRET PASSWORD -->
+  <div class="app-screen" id="screen-proposal-game" style="text-align: center;">
+    <div style="font-size: 40px; margin-bottom: 8px;">🥺💍</div>
+    <h2 style="font-family: 'Sacramento', cursive; font-size: 34px; color: var(--accent-color); margin-bottom: 12px; text-shadow: 0 0 15px rgba(255, 42, 95, 0.4);">Do you love me? ❤️</h2>
+    <p id="proposalDialogText" class="card-subtitle" style="margin-bottom: 24px; min-height: 60px; line-height: 1.6; font-size: 14.5px; padding: 0 10px;">
+      Maan bhi jao na meri cutie! Itni pyari ho, itna nakhra thodi suit karta hai... 😉❤️
+    </p>
+
+    <!-- Playful Buttons Container -->
+    <div id="proposalBtnBox" style="position: relative; min-height: 90px; display: flex; justify-content: center; gap: 16px; align-items: center; margin-bottom: 16px;">
+      <button id="btnSayYes" class="primary-btn" style="width: auto; padding: 12px 32px; margin: 0;" onclick="handleProposalYes()">YES! ❤️</button>
+      <button id="btnRunNo" class="theme-btn" style="width: auto; padding: 12px 28px; border-color: #ff0040; color: #ff4d6d; transition: all 0.25s ease;" onmouseover="handleProposalNo()" onclick="handleProposalNo()">NO 😜</button>
+    </div>
+
+    <!-- Hidden Heart Password Section -->
+    <div id="heartPassSection" style="display: none; animation: fadeIn 0.4s ease; margin-top: 18px;">
+      <div style="font-size: 15px; font-weight: 700; color: #ff2a5f; margin-bottom: 6px;">Hehe, Pakde Gaye! She Said YES! 💍🥰🎉</div>
+      <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 16px; line-height: 1.5;">
+        Hehe, aakhirkar maan hi gayi meri cutie! 🥰 Ab chalo jaldi se apne dil ke andar aane ka ek secret password yahan set karo...<br>
+        <span style="font-size: 11px; opacity: 0.85;">Tension mat lo, yeh password poori tarah safe hai, yahan koi nahi dekh sakta! 🤫💖</span>
+      </p>
+      
+      <div class="cyber-input" style="margin-bottom: 14px;">
+        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <input type="text" id="heartSecretPassword" placeholder="Dil ka secret password yahan likho... 🔐">
+      </div>
+
+      <button class="primary-btn" onclick="submitHeartPassword()">Confirm Password ✨</button>
+    </div>
+  </div>
+
+  <!-- FINAL CLIMAX DM POP-UP -->
+  <div id="finalDmPopup" style="display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--card-inner-bg); border: 2px solid var(--accent-color); border-radius: 28px; padding: 26px 20px; max-width: 360px; text-align: center; box-shadow: 0 15px 40px rgba(255, 30, 70, 0.4); animation: fadeIn 0.35s ease;">
+      <h2 style="font-size: 22px; font-weight: 800; color: var(--accent-color); margin-bottom: 8px;">Mission Accomplished! 😏🔥</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-color); margin-bottom: 18px;">
+        Arey waah! Haan bhi bol diya aur dil ka secret password bhi enter kar diya? <br><br>
+        Lekin aise kaam thodi chalega! Ab jaldi se mujhe DM mein aakar batao ki wo password kya hai, varna dil ka lock kaise khulega? 😉❤️
+      </p>
+      <button class="primary-btn" onclick="sendInDM()">Send in Instagram DM 📸💌</button>
+      <button class="theme-btn" style="margin-top: 10px; width: 100%;" onclick="document.getElementById('finalDmPopup').style.display='none'">Close & Replay 🔄</button>
+    </div>
+  </div>
+
+  <!-- Secret Mode Toast Notification -->
+  <div id="flirtHintToast" style="display: none; position: fixed; top: 65px; right: 20px; z-index: 9999; background: rgba(30, 4, 15, 0.95); border: 1.5px solid #ff2a5f; padding: 12px 16px; border-radius: 16px; box-shadow: 0 10px 25px rgba(255, 42, 95, 0.4); max-width: 260px; text-align: left; animation: fadeIn 0.4s ease;">
+    <div style="font-size: 12px; font-weight: 800; color: #ff2a5f; margin-bottom: 4px;">✨ Secret Mode Unlocked!</div>
+    <div style="font-size: 11px; color: #f7f7fb; line-height: 1.4;">Upar Flirt option on karke dekho, letter ka andaaz badal jayega... 😉🔥</div>
+  </div>
   <script>
     function createWaterWave(x, y) {
       const ripple1 = document.createElement('span');
@@ -941,7 +1334,7 @@
         popJoy: "Khushiyan Manayein ➔",
         balloonTitle: "Balloons Phodo 🎈",
         balloonSub: "Tap karke dekhein mere dil ki baatein ❤️",
-        cakeTitle: "Wish Mangiye! 🎂",
+        cakeTitle: "Make a Wish! 🎂",
         cakeDesc: "Slider ko kheench kar cake cut kijiye",
         cakeDone: "Cake Cut Ho Gaya! Ab cards kholiye 💌",
         reasons: [
@@ -1039,6 +1432,7 @@
         balloonWords: ["Sundari", "Buddhimati", "Awesome", "Snehi", "Priyatama"]
       }
     };
+
     const urlParams = new URLSearchParams(window.location.search);
     const paramName = urlParams.get('name');
     const paramAge = urlParams.get('age');
@@ -1048,8 +1442,161 @@
     let targetName = paramName ? decodeURIComponent(paramName) : "Babu";
     let targetAge = paramAge || "25";
     let targetPin = paramPin || "2026";
-    let selectedLang = paramLang || "hi";
+    window.selectedLang = paramLang || "hi";
+    let selectedLang = window.selectedLang;
     let t = langDict[selectedLang] || langDict.hi;
+    window.isFlirtModeOn = false;
+
+    function toggleFlirtMode() {
+      window.isFlirtModeOn = !window.isFlirtModeOn;
+      const btn = document.getElementById('flirtToggleBtn');
+
+      if (btn) {
+        if (window.isFlirtModeOn) {
+          btn.innerText = "🔥 Flirt: ON";
+          btn.style.borderColor = "#ff1e46";
+          btn.style.color = "#ff4d6d";
+          btn.style.boxShadow = "0 0 10px rgba(255, 30, 70, 0.4)";
+        } else {
+          btn.innerText = "💖 Flirt: OFF";
+          btn.style.borderColor = "";
+          btn.style.color = "";
+          btn.style.boxShadow = "";
+        }
+      }
+
+      const replayBtn = document.getElementById('btnReplayLetter');
+      if (replayBtn) {
+        replayBtn.style.display = window.isFlirtModeOn ? 'none' : 'block';
+      }
+
+      updateLetterContentLive();
+    }
+
+    function updateLetterContentLive() {
+      const currentLang = window.selectedLang || 'od';
+      const isFlirt = window.isFlirtModeOn;
+
+      const contentMap = {
+        normal: {
+          od: {
+            title: "SPECIAL-BOND-LETTER.TXT",
+            dear: `Dear <span class="highlight-name">${window.targetName || 'Partner'}</span>,`,
+            p1: "Happy Birthday mora sabuthu special person ku! ✨ Tuma aaji ra ehi dinati bohut sara hasa, santi au ananta khusi re bharijau.",
+            p2: "Mora jibana ku aasiba pain au mora sathire sabubele chhidahaebaku bhabiba pain tumaku anek anek dhanyabada. Bhale aji kalika samayare aame ete katha barta heiparune, kintu mane sabubele pakauchi au tumara sneha ku sabubele gurutwa diuchi. Tame bi mate sabubele emiti mane pakauthiba.",
+            p3: "Gote katha sachare kahibi? Tuma bina game kheli kheli jamaru bhala laguni, pura aalha laguchi! Jadi aaji tamaku alpa bi samaya miliba, tahele please gote message dei kahiba tame online aasiba boli—aame duijana misiki gote match kheliba au celebration kariba! 🎮✨",
+            p4: "Sabubele mane rakhiba, jete bhi duratare thau na kahinki, mora sahayoga au bhalapaiba tuma sathire sabudina rahiba. Hamesha emiti hasutha au nija jatna neuthaba.",
+            proposal: "Stay blessed & keep shining hamesha! 🌟🤝"
+          },
+          hi: {
+            title: "BEST-PARTNER-LETTER.TXT",
+            dear: `Dear <span class="highlight-name">${window.targetName || 'Partner'}</span>,`,
+            p1: "Happy Birthday to the most special person! ✨ Tumhara yeh din bohut saari khushiyan, sukoon aur muskurahaton se bhara rahe.",
+            p2: "Sabse pehle, thank you meri zindagi mein aane ke liye aur mere har mod par saath rehne ke liye. Bhale hi aaj kal utni baatein nahi ho pa rahi hain, par sach yeh hai ki main tumhe hamesha yaad karta hoon, aur bas yahi chahta hoon ki tum bhi mujhe kabhi bhulna mat.",
+            p3: "Aur haan, ek sach baat bolun? Tumhare bina game mein bilkul bhi mann nahi lag raha hai, poori lobby suni lagti hai! Agar aaj tumhe thoda sa bhi time mile na, toh please ek chhota sa message kar dena online aane se pehle—aaj saath mein game khel kar thoda celebrate karenge! 🎮🔥",
+            p4: "Zindagi mein chahe kuch bhi ho, hamesha yaad rakhna ki meri taraf se full support aur sacchi duayein hamesha tumhare saath hain. Khush raho aur hamesha aise hi muskurate raho.",
+            proposal: "Hamesha khush raho aur aage badhte raho! 🌟🤝"
+          },
+          en: {
+            title: "CLOSEST-BOND-LETTER.TXT",
+            dear: `Dear <span class="highlight-name">${window.targetName || 'Partner'}</span>,`,
+            p1: "Wishing the happiest birthday to someone truly special! ✨ May this day bring you boundless happiness, peace, and endless reasons to smile.",
+            p2: "First of all, thank you so much for coming into my life and always standing by my side. Even if we don't get to talk as often these days, you are always in my thoughts, and I truly cherish having you. Always remember this bond.",
+            p3: "To be completely honest, gaming just doesn't feel the same without you around! The lobby feels totally empty. If you manage to find some free time today, just drop me a quick message whenever you can hop online—we definitely need to play a match together to celebrate! 🎮✨",
+            p4: "Always know that no matter the distance, you will always have my unconditional support by your side. Keep smiling and take care of yourself.",
+            proposal: "Stay blessed, successful, and always smiling! 🌟🤝"
+          }
+        },
+        flirt: {
+          od: {
+            title: "dhana-LETTER.TXT",
+            dear: "Dear <span class='highlight-name'>dhana</span>,",
+            p1: "Happy Birthday mora sweetest headache ku! 😉❤️ Satya kahibi ta, tame jaha smile dia na, mora hrudaya seedha udi jae. Ete cute heba illegal heba katha!",
+            p2: "Tame mane rakhicha ki? Dina tame mate naughty smile dei pacharithila, 'Tame ete kasta kari kana pain banaucha ehi sabu?' Sedina mu kichi kahiparinathili karan mu tuma nka sundara aankhi re harigai thili, kintu aaji pura secret out karuchi! ✨\n\nAsala katha hela, mu tamaku emiti-semiti nuhe, pura pagala bhali pasand karuchi! Direct kahibaku thoda laja laguthila, seipain pura coding re aaji confess karideli. Mu to chhabi mana bhitare rakhi deichi, au ebe tame mora jeevana-sathi heiki rahibara achhi. 🤝💕",
+            p3: "Au haan, tuma bina game re bi mana laguni, laguchi pura gameplay hi bekar laguchi! Jadi aaji thik samaya miliba na, tahele jaldi gote text pathaidia tame online aasiba boli, aame duijana misiki kheliba! 🎮❤️",
+            p4: "Gote katha sabubele mane rakhiba, mora prathama kartavya hela tame mora sathire sabubele surakshita au khusi anubhava kara. Au rahi katha tuma svara ra, ta tuma dhana-bhara katha mate sabubele sabuthu mitha au priya lagithae mo dhana! ✨❤️",
+            proposal: "Mana jao na, dhana! Jaldi haan kahidia! 🥺💍"
+          },
+          hi: {
+            title: "KUCHU-PUCHU-LETTER.TXT",
+            dear: "Dear <span class='highlight-name'>kuchu puchu</span>,",
+            p1: "Happy Birthday mere sweetest headache ko! 😉❤️ Sach kahun toh, jab tum hasti ho na, mera dil seedha udd jata hai. Itna cute hona illegal hona chahiye!",
+            p2: "Tumhe yaad hai? Ek din tumne naughty smile ke saath pucha tha, 'Tum itni mehnat se kya bana rahe ho?' Us din maine kuch nahi kaha kyunki tumhari pyari aankhon mein kho gaya tha, par aaj poora secret out kar raha hoon! ✨\n\nAsal baat yeh hai ki main tumhe normal nahi, balki pagal ki tarah pasand karne laga hoon! 😉 Saamne bolne mein thodi heartbeat tez ho rahi thi, isliye poori coding mein confess kar diya. Dil par tumhara naam likh chuka hoon, ab lifetime partner banna padega. 🤝💕",
+            p3: "Aur ek sach bolun? Tumhare bina game mein bhi bilkul mann nahi lagta, har round boring lagta hai! Agar aaj thoda sa bhi time mile toh aane se pehle ek message drop kar dena, dono saath mein match khelenge! 🎮❤️",
+            p4: "Ek baat hamesha yaad rakhna, meri first priority ho tum—hamesha safe aur khush feel karo. Aur tumhari aawaz mere liye sabse meethi aur sukoon bhari hai, mere kuchu puchu! ✨❤️",
+            proposal: "Maan jao na, kuchu puchu! Jaldi haan bol do na! 🥺💍"
+          },
+          en: {
+            title: "SWEETEST-HEART-LETTER.TXT",
+            dear: "Dear <span class='highlight-name'>sweetest heart</span>,",
+            p1: "Happy Birthday to my sweetest headache! 😉❤️ Honestly, every time you smile, my heart skips a beat. Being this cute should honestly be illegal!",
+            p2: "Do you remember? That day you asked with a naughty smile, 'Why are you working so hard on this?' I was completely lost in your eyes to answer then, but today the secret is finally out! ✨\n\nThe truth is, I don't just like you—I'm crazy about you! 😉 Saying it directly gave me butterflies, so I poured my confession into this code. Your name is etched on my heart forever, and now you have to be my life-long partner. 🤝💕",
+            p3: "Also, honestly, games are completely lifeless without you by my side! If you get a bit of time today, drop a message before hopping online so we can play together. 🎮❤️",
+            p4: "Always remember one thing: my highest priority is that you feel safe, cherished, and deeply loved by my side. You are the most beautiful person in this universe—inside and out, my sweetest heart! ✨❤️",
+            proposal: "Please say yes, sweetest heart! Don't make me wait! 🥺💍"
+          }
+        }
+      };
+
+      const selectedData = isFlirt ? contentMap.flirt[currentLang] : contentMap.normal[currentLang];
+      if (!selectedData) return;
+
+      const headerEl = document.getElementById('macosFileTitle') || document.querySelector('.macos-title');
+      if (headerEl) headerEl.innerText = selectedData.title;
+
+      const dearEl = document.getElementById('letterDearTitle');
+      if (dearEl) dearEl.innerHTML = selectedData.dear;
+
+      const p1 = document.getElementById('letterPara1');
+      const p2 = document.getElementById('letterPara2');
+      const p3 = document.getElementById('letterPara3');
+      const prop = document.getElementById('letterProposalLine');
+
+      if (p1) p1.innerText = selectedData.p1;
+      if (p2) p2.innerText = selectedData.p2;
+      if (p3) p3.innerText = selectedData.p3 + "\n\n" + selectedData.p4;
+      if (prop) prop.innerHTML = `<span style="color:#ff2a5f; font-weight:700;">${selectedData.proposal}</span>`;
+    }
+
+    function updateWishCardsLanguage() {
+      const lang = window.selectedLang || 'od';
+      const wishesData = {
+        od: {
+          title: "Janamadina Ra Subhechha ✨",
+          sub: "Pratyeka card bhitare gote meetha katha achhi... 🥺💖",
+          c1: "Janamadina ra ananta subhechha! ✨ Tame mo jibana ku aasila pare sabu kichi ete sundara au hasakhusi re badaligala. Mora sabuthu bhala sanga heithibaru dhanyabada! 🥺💖",
+          c2: "Tuma hasa dekhi mora pura dina bhala katigae. Bhagaban nka thare prarthana, tuma jibana sabubele ananda, santi au saphalata re bhari rahu. Hamesha emiti hasutha! 🌸✨",
+          c3: "Samaya badalijau kintu aama samparka emiti majbut thau! Kichi bi paristhiti aashu, mane rakhiba tuma ehi sangata sabubele tuma sathire chhidahaichi. Enjoy your special day! 🎂🥳"
+        },
+        hi: {
+          title: "Flip these birthday wishes ✨",
+          sub: "Har card mein ek special message chhupa hai. 🥺💖",
+          c1: "Happy Birthday! Tum meri zindagi ki sabse badi blessing aur sabse bada support ho. Thank you mere har mod par saath rehne ke liye. 🥺💖",
+          c2: "Meri har muskurahat ki wajah tum ho. Dua hai ki tumhari zindagi hamesha dher saare pyaar, sukoon aur khushiyon se bhari rahe. 🥰✨",
+          c3: "Hamesha aise hi khush aur muskurate raho. Tum mere liye kitne special ho yeh lafzon mein bayaan nahi ho sakta! ❤️✨"
+        },
+        en: {
+          title: "Flip these birthday wishes ✨",
+          sub: "Each card holds a special message. 🥺💖",
+          c1: "Happy Birthday! You are my biggest blessing and constant support. I'm so grateful for everything you do. 🥺💖",
+          c2: "You are the reason behind my smiles. May your life always be filled with endless love, peace, and beautiful moments. 🥰✨",
+          c3: "Always stay happy, healthy and smiling. I love you more than words can ever express! ❤️✨"
+        }
+      };
+
+      const data = wishesData[lang] || wishesData.od;
+      const titleEl = document.getElementById('wishScreenTitle');
+      const subEl = document.getElementById('wishScreenSubtitle');
+      const msg1 = document.getElementById('wishMsg1');
+      const msg2 = document.getElementById('wishMsg2');
+      const msg3 = document.getElementById('wishMsg3');
+
+      if (titleEl) titleEl.innerText = data.title;
+      if (subEl) subEl.innerText = data.sub;
+      if (msg1) msg1.innerText = data.c1;
+      if (msg2) msg2.innerText = data.c2;
+      if (msg3) msg3.innerText = data.c3;
+    }
 
     let currentTheme = 'dark';
     function applyTheme(theme) {
@@ -1073,7 +1620,7 @@
       if (toEl) toEl.classList.add('active');
     }
 
-    function syncTexts() {
+        function syncTexts() {
       document.getElementById('txtThemeTitle').innerText = t.themeTitle;
       document.getElementById('txtThemeSub').innerText = t.themeSub;
       document.getElementById('txtLoginTitle').innerText = t.loginTitle;
@@ -1094,6 +1641,12 @@
 
       document.getElementById('displayUsername').innerText = targetName.toUpperCase() + "!";
       document.getElementById('authInputUser').value = targetName;
+
+      const cakeDyn = document.getElementById('cakeDynamicText');
+      if (cakeDyn) cakeDyn.innerText = "Happy Birthday " + targetName + " ✨";
+
+      const goldHeart = document.getElementById('goldHeartUsername');
+      if (goldHeart) goldHeart.innerText = targetName;
     }
 
     if (paramName && paramPin) {
@@ -1294,7 +1847,6 @@
       };
       updateCard(0);
     }
-
     function startBalloons() {
       const bList = document.querySelectorAll('.b3d');
       const nextBtn = document.getElementById('balloonNextBtn');
@@ -1322,7 +1874,7 @@
       const slider = document.getElementById('cakeCutSlider');
       const status = document.getElementById('cakeStatusText');
       const nextBtn = document.getElementById('cakeNextBtn');
-      const flame = document.querySelector('.flame');
+      const flame = document.querySelector('.flame-3d') || document.querySelector('.flame');
 
       slider.oninput = (e) => {
         if (e.target.value >= 95) {
@@ -1336,12 +1888,14 @@
       };
 
       nextBtn.onclick = () => {
+        if (typeof updateWishCardsLanguage === 'function') {
+          updateWishCardsLanguage();
+        }
         switchScreen('screen-cake', 'screen-wishes-vertical');
       };
     }
 
     const flippedSet = new Set();
-
     function flipWish(cardEl) {
       const inner = cardEl.querySelector('.wish-flip-inner');
       inner.classList.toggle('flipped');
@@ -1358,34 +1912,157 @@
     }
 
     document.getElementById('btnAllWishesDiscovered').onclick = () => {
-      const petName = (selectedLang === 'od') ? 'dhana' : 'babu';
-      
-      const upperName = targetName.toUpperCase();
-      document.getElementById('macosFileTitle').innerText = `${upperName}-LETTER.TXT`;
-      document.getElementById('letterTargetName').innerText = targetName;
-      document.getElementById('letterPetName').innerText = petName;
-      document.getElementById('letterDearTitle').innerHTML = `Dear <span class="highlight-name">${targetName}</span>,`;
-
-      if (selectedLang === 'en') {
-        document.getElementById('letterPara1').innerText = `Happy Birthday to the gorgeous person who makes my life so bright and beautiful. Honestly, you're not just my favorite, you're my home. 😉❤️`;
-        document.getElementById('letterPara2').innerText = `I built this entire website with so much effort and love, just for you, hoping to see that magical smile on your face. ✨`;
-        document.getElementById('letterPara3').innerText = `Please say yes to my proposal already! Let's become one forever. I promise I will never leave your side for the rest of my life. 🤝💕`;
-        document.getElementById('letterProposalLine').innerHTML = `Please say yes, my love (${petName})! Don't break my heart! 🥺💍`;
-      } else if (selectedLang === 'od') {
-        document.getElementById('letterPara1').innerText = `Happy Birthday set ku, jiye mora jibanku sundar o khusi bhara banayidie. Satya kahibi ta tumete sabuthu alada. 😉❤️`;
-        document.getElementById('letterPara2').innerText = `Ehi website ti kebala tumapain bahuta kasta o bhalapaibare tairi karichhi, kebala tuma chhere hasa dekhiba pain. ✨`;
-        document.getElementById('letterPara3').innerText = `Ebe aaku mana jao na! Jaldi mora proposal re 'Haan' kahidia, ame sabudina pain eka heba. Mu katha dichhi jibare kebe satha chhadibi nahi. 🤝💕`;
-        document.getElementById('letterProposalLine').innerHTML = `Mana jao na, <span id="letterPetName">${petName}</span>! Jaldi haan kahidia! 🥺💍`;
-      } else {
-        document.getElementById('letterPara1').innerText = `Happy Birthday ${targetName}! Tum meri life ki sabse khoobsurat hissa ho. Tumhe hasane ke liye hi toh yeh sab kiya hai. 😉❤️`;
-        document.getElementById('letterPara2').innerText = `Maine yeh website kitni mehnat aur sirf tumhare liye banayi hai, ab toh samajh jao na ki tum mere liye kitni special ho! ✨`;
-        document.getElementById('letterPara3').innerText = `Maan jao na jaldi se mere proposal par 'haan' bol do, hum hamesha ke liye ek ho jayenge. Main wada karta hoon jindagi bhar kabhi saath nahi chhodunga. 🤝💕`;
-        document.getElementById('letterProposalLine').innerHTML = `Maan jao na, <span id="letterPetName">${petName}</span>! Ab aur kitna tadpaogi? 🥺💍`;
+      if (typeof updateLetterContentLive === 'function') {
+        updateLetterContentLive();
       }
 
       switchScreen('screen-wishes-vertical', 'screen-final-letter');
       createWaterWave(window.innerWidth / 2, window.innerHeight / 2);
+
+      const flirtBtn = document.getElementById('flirtToggleBtn');
+      const toast = document.getElementById('flirtHintToast');
+      if (flirtBtn) {
+        flirtBtn.style.display = 'inline-block';
+        flirtBtn.style.animation = 'shake 0.5s ease';
+      }
+      if (toast) {
+        toast.style.display = 'block';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 5000);
+      }
     };
+
+    // --- PROPOSAL NAVIGATION & TEASER LOGIC ---
+    function goToProposalScreen() {
+      if (!window.isFlirtModeOn) {
+        const teaser = document.getElementById('teaserCustomPopup');
+        if (teaser) teaser.style.display = 'flex';
+      } else {
+        proceedToProposalDirectly();
+      }
+    }
+
+    function handleLetterNextClick() {
+      goToProposalScreen();
+    }
+
+    function closeTeaserPopup() {
+      const teaser = document.getElementById('teaserCustomPopup');
+      if (teaser) teaser.style.display = 'none';
+    }
+
+    function confirmTeaserProceed() {
+      closeTeaserPopup();
+
+      window.isFlirtModeOn = true;
+      const btn = document.getElementById('flirtToggleBtn');
+      if (btn) {
+        btn.innerText = "🔥 Flirt: ON (Locked 🔒)";
+        btn.style.borderColor = "#ff1e46";
+        btn.style.color = "#ff4d6d";
+        btn.onclick = () => {
+          const toast = document.getElementById('flirtHintToast');
+          if (toast) {
+            toast.innerHTML = `<div style="font-size:12px; font-weight:800; color:#ff2a5f;">Arey! 🤭</div><div style="font-size:11px; color:#f7f7fb;">Ab yeh secret mode band nahi ho sakta... Sirf smile kijiye! 😉❤️</div>`;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 4000);
+          }
+        };
+      }
+
+      const replayBtn = document.getElementById('btnReplayLetter');
+      if (replayBtn) replayBtn.style.display = 'none';
+
+      proceedToProposalDirectly();
+    }
+
+    function proceedToProposalDirectly() {
+      switchScreen('screen-final-letter', 'screen-proposal-game');
+      if (typeof createWaterWave === 'function') {
+        createWaterWave(window.innerWidth / 2, window.innerHeight / 2);
+      }
+    }
+
+    // --- 12 PLAYFUL NO DIALOGUES SEQUENCE ---
+    let noClickCount = 0;
+    const noDialogues = [
+      "Aise kaise direct No bol diya meri cutie? Ek baar apne dil se puchho, wo kabse Haan keh raha hai! 🥺💖",
+      "Arey arey... Dekho NO button bhi aapse door bhaag raha hai! Wo bhi chahta hai ki meri cutie bas YES dabaye! 😉✨",
+      "Itna pyara gussa karna sirf aapko hi suit karta hai! Lekin ab maan jao na meri gudiya... 🥺❤️",
+      "Acha ji? Itna nakhra? Free Fire mein enemy se nahi darta, par aapke iss No se sach mein dil ko bura lag raha hai! 🥺🎮",
+      "Dekho ab main rone lag jaunga... Fir manaane ke liye chocolate aur extra treat deni padegi! 🍫🥺",
+      "Pata hai, aap haste hue jitni khoobsurat lagti ho na, utna koi nahi lagta... Toh yeh chhota sa nakhra chhodo aur smile ke sath Haan kaho! 🌸🥰",
+      "Aap jitni baar NO dabane ki koshish karogi, mera pyaar utni baar 100x multiply hota jayega! 📈❤️",
+      "Dekhiye aap itni khoobsurat hain, aapko is tarike se mujhe Na bolna achha lagta hai manta hoon aap bahut khoobsurat hain lekin fir bhi aapko Na nahi bolna chahiye achha nahi lagta hai (mere liye hi bas) 😉❤️",
+      "Dekhiye aap bahut khoobsurat ho aur aapko pata hai aap jab bhi mere upar gussa karte hain tab aap aur bhi zyada pyare lagte ho! Jo bhi ho aap mere upar is tarike se haq jatate ho yeh mujhe achha lagta hai, chalo ab jaldi se haan bol do! 🥰💍",
+      "Hum maante hain ki aap bahut cute ho, par gusse aur nakhre se zyada aapke upar 'YES' bolna suit karta hai! 🥰💍",
+      "Bas ab aakhri warning... NO button ka stamina khatam ho raha hai, ab wo permanently gayab hone wala hai!",
+      "Dekha! NO button khud haar maan gaya... Ab pure universe mein sirf YES ka hi option bacha hai! Chalo jaldi se YES daba do! 💍❤️✨"
+    ];
+
+    function handleProposalNo() {
+      const btnNo = document.getElementById('btnRunNo');
+      const dialog = document.getElementById('proposalDialogText');
+      if (!btnNo) return;
+
+      if (noClickCount < noDialogues.length) {
+        if (dialog) dialog.innerText = noDialogues[noClickCount];
+        noClickCount++;
+      }
+
+      const randomX = Math.floor(Math.random() * 160) - 80;
+      const randomY = Math.floor(Math.random() * 80) - 40;
+      btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+      if (noClickCount >= 12) {
+        btnNo.style.display = 'none';
+        const yesBtn = document.getElementById('btnSayYes');
+        if (yesBtn) {
+          yesBtn.style.transform = 'scale(1.25)';
+          yesBtn.style.boxShadow = '0 0 30px rgba(255, 42, 95, 0.9)';
+        }
+      }
+    }
+
+    function handleProposalYes() {
+      const btnNo = document.getElementById('btnRunNo');
+      const btnYes = document.getElementById('btnSayYes');
+      if (btnNo) btnNo.style.display = 'none';
+      if (btnYes) {
+        btnYes.style.pointerEvents = 'none';
+        btnYes.innerText = "YAY! She Said YES! 💍🥰";
+      }
+      document.getElementById('heartPassSection').style.display = 'block';
+      if (typeof createWaterWave === 'function') {
+        createWaterWave(window.innerWidth / 2, window.innerHeight / 2);
+      }
+    }
+
+    function submitHeartPassword() {
+      const pass = document.getElementById('heartSecretPassword').value.trim();
+      if (!pass) {
+        alert("Pehle secret password toh likhiye! 🥺");
+        return;
+      }
+      const popup = document.getElementById('finalDmPopup');
+      popup.style.display = 'flex';
+      if (typeof createWaterWave === 'function') {
+        createWaterWave(window.innerWidth / 2, window.innerHeight / 2);
+      }
+    }
+
+    function sendInDM() {
+      const pass = document.getElementById('heartSecretPassword').value.trim();
+      const textToCopy = `Hehe, maine website par Haan bol diya hai! 💍❤️ Aur mere dil ka secret password yeh hai: "${pass}" 😉`;
+      
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(textToCopy);
+      }
+      
+      alert("Dil ka secret password copy ho gaya hai! ✨ Bas Instagram DM khol kar paste kar do!");
+      window.open("https://instagram.com/direct/inbox/", "_blank");
+    }
   </script>
 </body>
 </html>

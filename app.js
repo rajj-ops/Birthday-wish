@@ -1,129 +1,115 @@
+// ==========================================
+// 1. GLOBAL STATE & CONFIGURATION
+// ==========================================
+window.selectedTheme = 'dark';
+window.selectedLang = 'od';
+window.targetName = 'Raj';
+window.isFlirtModeOn = false;
+
+// ==========================================
+// 2. SMOOTH SCREEN SWITCHER WITH TRANSITIONS
+// ==========================================
+window.switchScreen = function(fromId, toId) {
+  const fromEl = document.getElementById(fromId);
+  const toEl = document.getElementById(toId);
+  if (!toEl) return;
+
+  if (fromEl) {
+    fromEl.classList.add('screen-exit');
+    setTimeout(() => {
+      fromEl.classList.remove('active', 'screen-exit');
+      fromEl.style.display = 'none';
+
+      toEl.style.display = 'block';
+      // Entry animation reset
+      void toEl.offsetWidth;
+      toEl.classList.add('active');
+    }, 250);
+  } else {
+    toEl.style.display = 'block';
+    toEl.classList.add('active');
+  }
+};
+
+// ==========================================
+// 3. INTERACTIVE TOUCH / WATER RIPPLE EFFECT
+// ==========================================
+window.createWaterWave = function(x, y) {
+  const ripple = document.createElement('div');
+  ripple.className = 'water-ripple';
+  ripple.style.left = `${x}px`;
+  ripple.style.top = `${y}px`;
+
+  const secRipple = document.createElement('div');
+  secRipple.className = 'water-ripple-secondary';
+  secRipple.style.left = `${x}px`;
+  secRipple.style.top = `${y}px`;
+
+  document.body.appendChild(ripple);
+  document.body.appendChild(secRipple);
+
+  setTimeout(() => {
+    ripple.remove();
+    secRipple.remove();
+  }, 750);
+};
+
+// Global tap / pointer event par ripple
+document.addEventListener('pointerdown', (e) => {
+  if (typeof createWaterWave === 'function') {
+    createWaterWave(e.clientX, e.clientY);
+  }
+});
+
+// ==========================================
+// 4. THEME TOGGLE (DARK / LIGHT MODE)
+// ==========================================
+window.toggleTheme = function() {
+  const body = document.body;
+  const currentTheme = body.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+  body.setAttribute('data-theme', newTheme);
+  window.selectedTheme = newTheme;
+
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) {
+    btn.innerHTML = newTheme === 'light' ? '🌙 Dark' : '☀️ Light';
+  }
+};
+
+// ==========================================
+// 5. FLIRTING MODE TOGGLE ENGINE
+// ==========================================
+window.toggleFlirtMode = function() {
+  window.isFlirtModeOn = !window.isFlirtModeOn;
+  const btn = document.getElementById('flirtToggleBtn');
+
+  if (btn) {
+    btn.innerText = window.isFlirtModeOn ? "🔥 Flirt: ON" : "💖 Flirt: OFF";
+    btn.classList.toggle('flirt-active', window.isFlirtModeOn);
+  }
+
+  // Agar user abhi final letter screen par hai toh text live badal jayega
+  if (typeof window.renderFinalLetterDynamic === 'function') {
+    window.renderFinalLetterDynamic();
+  }
+};
+
+// ==========================================
+// 6. INITIALIZATION ON DOM LOAD
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-  function switchScreen(fromId, toId) {
-    const fromEl = document.getElementById(fromId);
-    const toEl = document.getElementById(toId);
-    if (fromEl) fromEl.classList.remove('active');
-    if (toEl) toEl.classList.add('active');
-  }
+  // Theme apply
+  document.body.setAttribute('data-theme', window.selectedTheme);
 
-  // URL Query Parameters ya LocalStorage se Target Data Read Karna
-  const params = new URLSearchParams(window.location.search);
-  const targetName = params.get('name') || localStorage.getItem('wish_name') || 'Babu';
-  const targetAge = params.get('age') || localStorage.getItem('wish_age') || '20';
-  const targetPin = params.get('pin') || localStorage.getItem('wish_pin') || '2026';
-  const currentLang = params.get('lang') || localStorage.getItem('wish_lang') || 'hi';
-
-  const t = langData[currentLang] || langData['hi'];
-
-  // Text setup
-  document.getElementById('displayUsername').innerText = targetName;
-  document.getElementById('authInputUser').value = targetName;
-  document.getElementById('otpUserPhoneTag').innerText = targetName;
-
-  document.getElementById('txtWelcome').innerText = t.welcomeTitle;
-  document.getElementById('txtIntroName').innerText = `${t.hello} ${targetName}!`;
-  document.getElementById('txtReady').innerText = t.readyQuestion;
-  document.getElementById('btnStartIntro').innerText = t.btnBegin;
-
-  document.getElementById('txtFlipTitle').innerText = t.flipHeader;
-  document.getElementById('txtTapUncover').innerText = t.tapUncover;
-
-  document.getElementById('txtBalloonTitle').innerText = t.balloonTitle;
-  document.getElementById('txtBalloonSub').innerText = t.balloonSub;
-
-  document.getElementById('txtCakeTitle').innerText = t.cakeTitle;
-  document.getElementById('cakeStatusText').innerText = t.cakeDesc;
-
-  // ========================================================
-  // STEP 1: VERIFY PASSWORD (IMAGE 2 CYBERPUNK CARD)
-  // ========================================================
-  const passInput = document.getElementById('authInputPass');
-  const btnVerify = document.getElementById('btnVerifyPassword');
-  const errorMsg = document.getElementById('cyberErrorMsg');
-  const cardBox = document.getElementById('cyberCardBox');
-
-  btnVerify.addEventListener('click', () => {
-    const entered = passInput.value.trim();
-
-    if (entered === targetPin) {
-      // Sahi Password: Move to Stage 2 (Video OTP Verification Screen)
-      errorMsg.innerText = "";
-      switchScreen('screen-auth-step1', 'screen-auth-step2');
-      initOtpScreen();
-    } else {
-      // Galat Password: Shake card aur exact error message
-      cardBox.classList.add('shake-card');
-      errorMsg.innerText = "Invalid password! Jisne aapko link bheja hai usse puchiye ki password kya hai.";
-      setTimeout(() => cardBox.classList.remove('shake-card'), 500);
-      passInput.value = "";
+  // Initial active screen show
+  const activeScreens = document.querySelectorAll('.app-screen.active');
+  if (activeScreens.length === 0) {
+    const firstScreen = document.querySelector('.app-screen');
+    if (firstScreen) {
+      firstScreen.style.display = 'block';
+      firstScreen.classList.add('active');
     }
-  });
-
-  // ========================================================
-  // STEP 2: VIDEO OTP AUTO-FILL & GREEN CHECKMARK ANIMATION
-  // ========================================================
-  function initOtpScreen() {
-    const pboxes = [
-      document.getElementById('pbox-1'),
-      document.getElementById('pbox-2'),
-      document.getElementById('pbox-3'),
-      document.getElementById('pbox-4')
-    ];
-    const btnAutoFill = document.getElementById('btnTriggerAutoFill');
-    const subCardArea = document.getElementById('otpSubCardArea');
-    const successView = document.getElementById('otpSuccessView');
-    const btnProceed = document.getElementById('btnProceedToWish');
-
-    // Video exact "Fill" animation: Ek-ek digit pop hokar type hoga
-    btnAutoFill.onclick = () => {
-      let idx = 0;
-      btnAutoFill.disabled = true;
-
-      const fillInterval = setInterval(() => {
-        if (idx < targetPin.length) {
-          pboxes[idx].innerText = targetPin[idx];
-          pboxes[idx].classList.add('filled');
-          idx++;
-        } else {
-          clearInterval(fillInterval);
-
-          // All 4 typed! Trigger Video Green Checkmark
-          setTimeout(() => {
-            subCardArea.style.display = 'none';
-            successView.style.display = 'block';
-          }, 350);
-        }
-      }, 200);
-    };
-
-    // Continue to Birthday Celebration
-    btnProceed.onclick = () => {
-      switchScreen('screen-auth-step2', 'screen-intro');
-      startBirthdayJourney();
-    };
-  }
-
-  // ========================================================
-  // STEP 3: BIRTHDAY CELEBRATION JOURNEY
-  // ========================================================
-  function startBirthdayJourney() {
-    // Intro -> 12 Flip Cards
-    document.getElementById('btnStartIntro').onclick = () => {
-      switchScreen('screen-intro', 'screen-flip');
-
-      setupFlipCards(t, () => {
-        // Flip Cards -> 3D Balloons
-        switchScreen('screen-flip', 'screen-balloon');
-
-        setupBalloonScreen(t, () => {
-          // Balloons -> Cake Cutting
-          switchScreen('screen-balloon', 'screen-cake');
-
-          setupCakeScreen(t, () => {
-            alert(`Happy Birthday ${targetName}! All surprises completed! ✨`);
-          });
-        });
-      });
-    };
   }
 });

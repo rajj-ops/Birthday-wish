@@ -1,100 +1,119 @@
-/* Container & Arc Layout */
-.balloon-stage {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 10px;
-  min-height: 140px;
-  margin: 30px auto 20px;
-  position: relative;
-  padding: 10px 0;
+/* BALLOON CONTAINER & STAGE */
+#screen-balloon {
+  position: relative !important;
+  z-index: 50 !important;
 }
 
-/* 3D Realistic Balloons */
-.b3d {
-  width: 52px;
-  height: 68px;
-  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+.balloon-stage-area {
   position: relative;
+  width: 100%;
+  height: 330px;
+  margin: 15px auto 10px;
+  pointer-events: auto !important;
+  z-index: 60 !important;
+}
+
+/* INDIVIDUAL FLOATING WRAPPERS */
+.balloon-item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
+  pointer-events: auto !important;
+  z-index: 70 !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 3D BALLOON SPHERE */
+.balloon-body {
+  width: 60px;
+  height: 78px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  box-shadow: inset -6px -8px 14px rgba(0, 0, 0, 0.45), 
+              inset 6px 8px 12px rgba(255, 255, 255, 0.45), 
+              0 10px 22px rgba(0, 0, 0, 0.35);
+  pointer-events: auto !important;
+  transition: all 0.25s ease;
 }
 
-/* Knot niche */
-.b3d::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 7px solid rgba(255, 60, 100, 0.9);
-  transition: opacity 0.3s ease;
-}
+/* 3D COLORS */
+.b-pink   { background: radial-gradient(circle at 35% 30%, #fff 0%, #ff5c8a 45%, #d90429 100%) !important; }
+.b-yellow { background: radial-gradient(circle at 35% 30%, #fff 0%, #ffd166 45%, #d48b00 100%) !important; }
+.b-blue   { background: radial-gradient(circle at 35% 30%, #fff 0%, #60a5fa 45%, #1d4ed8 100%) !important; }
+.b-green  { background: radial-gradient(circle at 35% 30%, #fff 0%, #4ade80 45%, #15803d 100%) !important; }
+.b-purple { background: radial-gradient(circle at 35% 30%, #fff 0%, #c084fc 45%, #7e22ce 100%) !important; }
 
-/* Natural Arc Curve (Video ke hisaab se) */
-.b3d:nth-child(1) { transform: translateY(-12px); }
-.b3d:nth-child(2) { transform: translateY(0px); }
-.b3d:nth-child(3) { transform: translateY(8px); }
-.b3d:nth-child(4) { transform: translateY(-6px); }
-.b3d:nth-child(5) { transform: translateY(-18px); }
-
-/* 3D Glossy Light Reflection (Gradient styling) */
-.b3d-pink1 {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffc2d1 25%, #ff85a1 70%, #f72585 100%);
-}
-.b3d-pink2 {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe5ec 25%, #ffb3c6 70%, #fb6f92 100%);
-}
-.b3d-white {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffffff 30%, #f0e6ef 70%, #e2cfea 100%);
-}
-.b3d-yellow {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fff3b0 25%, #ffd166 70%, #f48c06 100%);
-}
-.b3d-purple {
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #e0c3fc 25%, #bb9af7 70%, #7b2cbf 100%);
-}
-
-/* Inner Text initially hidden */
-.b3d-txt {
-  opacity: 0;
-  font-size: 11px;
-  font-weight: 700;
-  font-style: italic;
-  letter-spacing: 0.5px;
-  color: #d6336c;
+/* HANGING STRING */
+.balloon-string {
+  width: 1.5px;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.1));
   pointer-events: none;
-  transform: scale(0.6);
-  transition: all 0.35s ease 0.15s;
 }
 
-/* State when clicked: Balloon morphs into soft glow pill with text inside */
-.b3d.revealed {
-  border-radius: 25px !important;
-  background: rgba(255, 255, 255, 0.72) !important;
-  backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(255, 182, 193, 0.8);
-  box-shadow: 0 4px 15px rgba(255, 77, 109, 0.25);
-  transform: translateY(0) scale(1.05) !important;
+.balloon-text {
+  display: none;
+  font-size: 13px;
+  font-weight: 800;
+  color: #be123c;
+  white-space: nowrap;
 }
 
-.b3d.revealed::after {
-  opacity: 0;
+/* POPPED / REVEALED WORD PILL */
+.balloon-item.revealed .balloon-body {
+  width: auto !important;
+  min-width: 100px !important;
+  height: 40px !important;
+  padding: 0 16px !important;
+  border-radius: 20px !important;
+  background: #ffffff !important;
+  border: 2.5px solid #ff2a5f !important;
+  box-shadow: 0 0 20px rgba(255, 42, 95, 0.65), 0 4px 12px rgba(0,0,0,0.3) !important;
 }
 
-.b3d.revealed .b3d-txt {
-  opacity: 1;
-  transform: scale(1);
+.balloon-item.revealed .balloon-text {
+  display: block !important;
 }
 
-/* Dark mode compatibility */
-[data-theme="dark"] .b3d.revealed {
-  background: rgba(255, 255, 255, 0.88) !important;
-  color: #9d0208;
+.balloon-item.revealed .balloon-string {
+  display: none !important;
 }
+
+/* SLOW-MOTION ORGANIC FLOAT KEYFRAMES */
+@keyframes floatAnim1 {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-18px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+@keyframes floatAnim2 {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-22px) rotate(-3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+@keyframes floatAnim3 {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-16px) rotate(2.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+@keyframes floatAnim4 {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-20px) rotate(-2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+@keyframes floatAnim5 {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-24px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* POSITIONS + ATTACHED ANIMATIONS */
+.b-pos-1 { left: 8%;  top: 35px;  animation: floatAnim1 3.5s ease-in-out infinite !important; }
+.b-pos-2 { left: 56%; top: 25px;  animation: floatAnim2 4.2s ease-in-out infinite !important; }
+.b-pos-3 { left: 68%; top: 120px; animation: floatAnim3 3.2s ease-in-out infinite !important; }
+.b-pos-4 { left: 40%; top: 160px; animation: floatAnim4 3.8s ease-in-out infinite !important; }
+.b-pos-5 { left: 14%; top: 200px; animation: floatAnim5 4.5s ease-in-out infinite !important; }
